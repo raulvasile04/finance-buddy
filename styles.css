@@ -1,0 +1,244 @@
+body{
+    background : #2FA084;
+}
+
+h1{
+    color: white;
+    font-family: "Bungee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+
+h2{
+    color: white;
+    font-family: "Bungee", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header{
+    display : flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1F6F5F;
+    height : 30dvh;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.summary{
+    display : flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #1F6F5F;
+    margin: 2dvh;
+    padding : 2dvh;
+    border-radius: 10%;
+    height: 55dvh;
+    overflow-y : auto;
+    width: 50dvh;
+    gap : 10px;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.summary::-webkit-scrollbar {
+    display: none;
+}
+
+.transactions{
+    display : flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #1F6F5F;
+    padding : 2dvh;
+    margin : 2dvh;
+    border-radius: 10%;
+    width : 50dvh;
+    height: 55dvh;
+    gap : 10px;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+#transactions{
+    display : flex;
+    flex-direction: column;
+    gap : 2dvh;
+}
+
+.container{
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.balance{
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 30dvh;
+    padding: 3dvh;
+    gap : 20px;
+    border-radius: 10%;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.balance > label{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-size: 2.9dvh;
+    font-weight: 50;
+    font-style: normal;
+}
+
+.income{
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10%;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.income > h3{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-size: 2.9dvh;
+    font-style: normal;
+}
+
+.income > p{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+    margin-top: 2px;
+}
+
+.expenses{
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10%;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.expenses > h3{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-size: 2.9dvh;
+    font-style: normal;
+}
+
+.expenses > p{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+    margin-top: 2px;
+}
+
+.transaction-fields{
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 55dvh;
+    border-radius: 10%;
+    padding : 2dvh;
+    gap : 10px;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.transaction-fields > h3{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+}
+
+.transaction-fields label{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+}
+
+.transaction-lists{
+    display : flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #1F6F5F;
+    padding : 2dvh;
+    margin : 2dvh;
+    border-radius: 10%;
+    width : 50dvh;
+    height: 55dvh;
+    gap : 10px;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.transaction-list{
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow-y: auto ;
+    height: 53dvh;
+    align-items: center;
+    border-radius: 10%;
+    box-shadow: 0 0 15px rgba(0,0, 0, 0.5);
+}
+
+.transaction-list::-webkit-scrollbar {
+    display: none;
+}
+
+.transaction-list > h3{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-weight: 50;
+    font-style: normal;
+}
+
+input{
+    width : 90%;
+    border-radius: 10px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    width : 90%;
+    background-color : #6FCF97;
+}
+
+select{
+    width : 90%;
+    border-radius: 10px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#starting-balance-amount{
+    color : black;
+    font-family: "Bungee", sans-serif;
+    font-size: 20px;
+    font-weight: 50;
+    font-style: normal;
+    padding : 1px;
+}
