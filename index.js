@@ -10,16 +10,39 @@ const transactionType = document.getElementById("transaction-type");
 const incomeAmount = document.getElementById("income-amount");
 const expenseAmount = document.getElementById("expense-amount");
 
-
 let transactions = [];
 
-addStartingBalanceButton.addEventListener("click", () => {
-    let startingBalance = {
-        startingBalanceNumber : startingBalanceInput.value
-    };
-    const p = document.createElement("p");
-    startingBalanceAmount.textContent = `Your starting balance : $${startingBalance.startingBalanceNumber}`;
-})
+function displayTransactions() {
+    transactionList.innerHTML = "";
+    document.querySelectorAll(".transaction-lists:not(#original-list)").forEach(card => card.remove());
+    transactions.forEach(transaction => {
+        const date = new Date(transaction.date);
+        const month = date.toLocaleString("default", {month: "long"});
+        const existingCard = document.getElementById(`${month}-card`);
+        const li = document.createElement("li");
+        li.textContent = `Your transaction : ${transaction.description} , ${transaction.type} $${transaction.amount} , ${transaction.date}`;
+        transactionList.appendChild(li);
+        if (existingCard === null) {
+            createMonthCard(month);
+        } else {
+
+        }
+
+        const monthCard = document.getElementById(`${month}-card`);
+        const ul = monthCard.querySelector("ul");
+        ul.appendChild(li)
+    });
+
+    incomeAmount.textContent = `$${calculatorIncome()}`;
+    expenseAmount.textContent = `$${calculatorExpense()}`;
+}
+
+if(localStorage.getItem("transactions") != null){
+    transactions = JSON.parse(localStorage.getItem("transactions"));
+    displayTransactions()
+}
+
+console.log(transactions);
 
 function calculatorIncome(){
     let total = Number(startingBalanceInput.value);
@@ -41,6 +64,32 @@ function calculatorExpense(){
     return total;
 }
 
+function createMonthCard(month){
+    const monthCard = document.createElement("div");
+    const whiteBox = document.createElement("div");
+    monthCard.id = `${month}-card`;
+    monthCard.className = "transaction-lists"
+    whiteBox.className = "transaction-list";
+    const h3 = document.createElement("h3");
+    h3.textContent = month;
+    whiteBox.appendChild(h3);
+    const ul = document.createElement("ul");
+    whiteBox.appendChild(ul);
+    monthCard.appendChild(whiteBox);
+    document.querySelector(".container").appendChild(monthCard);
+}
+
+addStartingBalanceButton.addEventListener("click", () => {
+    let startingBalance = {
+        startingBalanceNumber : startingBalanceInput.value
+    };
+    const p = document.createElement("p");
+    startingBalanceAmount.textContent = `Your starting balance : $${startingBalance.startingBalanceNumber}`;
+
+    startingBalanceInput.style.display = "none";
+    addStartingBalanceButton.style.display = "none";
+});
+
 transactionButton.addEventListener("click", () => {
     let newTransaction = {
         description: transactionDescription.value,
@@ -49,22 +98,10 @@ transactionButton.addEventListener("click", () => {
         type: transactionType.value
     };
     transactions.push(newTransaction);
-    console.log(transactions);
-
-    if(transactionType.value === "income"){
-        const li = document.createElement("li");
-        li.textContent = `Your transaction : ${newTransaction.description} , ${newTransaction.type} $${newTransaction.amount} , ${newTransaction.date}`;
-        transactionList.appendChild(li);
-        incomeAmount.textContent = `$${calculatorIncome()}`;
-    }
-    else if(transactionType.value === "expense"){
-        const li = document.createElement("li");
-        li.textContent = `Your transaction : ${newTransaction.description} , ${newTransaction.type} $${newTransaction.amount} , ${newTransaction.date}`;
-        transactionList.appendChild(li);
-        expenseAmount.textContent = `$${calculatorExpense()}`;
-    }
-
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+    displayTransactions();
     transactionDescription.value = "";
     transactionAmount.value = "";
     transactionDate.value = "";
 });
+
