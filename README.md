@@ -4,4 +4,4 @@ FinanceBuddy is a web-based personal finance tracker that allows users to manage
 
 # Pictures 
 
-![FinanceBuddy Screenshot](./finance-buddy1)
+![FinanceBuddy Screenshot](./assets/finance-buddy1)
