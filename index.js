@@ -12,6 +12,15 @@ const expenseAmount = document.getElementById("expense-amount");
 
 let transactions = [];
 
+const modal = document.getElementById("modal");
+const closeModal = document.getElementById("close-modal");
+modal.style.display = "flex";
+closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+
+
 function displayTransactions() {
     transactionList.innerHTML = "";
     document.querySelectorAll(".transaction-lists:not(#original-list)").forEach(card => card.remove());
