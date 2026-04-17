@@ -2,7 +2,9 @@
 
 FinanceBuddy is a web-based personal finance tracker that allows users to manage their income and expenses, track transactions by month, and monitor their financial balance.
 
-https://raulvasile04.github.io/finance-buddy/
+## 🌐 Live Demo
+
+(https://raulvasile04.github.io/finance-buddy/)
 
 ## 📸Pictures
 ![FinanceBuddy Screenshot](./assets/fb1.png)
