@@ -47,3 +47,4 @@ Transactions are automatically grouped by month, and the UI updates dynamically 
 
 Raul-Valentin Vasile  
 [GitHub](https://github.com/raulvasile04)
+[LinkedIn](https://linkedin/in/raul-valentin-vasile)
