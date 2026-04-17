@@ -3,7 +3,7 @@ body{
     overflow-x:auto ;
 }
 
-.body::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none;
 }
 
@@ -267,9 +267,18 @@ input{
     align-items: center;
 }
 
-button{
+#add-transaction {
     width : 90%;
     background-color : #6FCF97;
+    padding : 5px;
+    border-radius: 15px;
+}
+
+#starting-balance-button{
+    width : 90%;
+    background-color : #6FCF97;
+    padding : 5px;
+    border-radius: 15px;
 }
 
 select{
