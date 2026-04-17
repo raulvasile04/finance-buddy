@@ -15,7 +15,7 @@ let transactions = [];
 function displayTransactions() {
     transactionList.innerHTML = "";
     document.querySelectorAll(".transaction-lists:not(#original-list)").forEach(card => card.remove());
-    transactions.forEach(transaction => {
+    transactions.forEach((transaction, index) => {
         const date = new Date(transaction.date);
         const month = date.toLocaleString("default", {month: "long"});
         const existingCard = document.getElementById(`${month}-card`);
@@ -31,6 +31,24 @@ function displayTransactions() {
         const monthCard = document.getElementById(`${month}-card`);
         const ul = monthCard.querySelector("ul");
         ul.appendChild(li)
+
+        if(transaction.type === "income"){
+            li.className = "transaction-income";
+        }
+        else if(transaction.type === "expense"){
+            li.className = "transaction-expense";
+        }
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-button");
+        deleteButton.dataset.index = index;
+        deleteButton.addEventListener("click", () => {
+            transactions.splice(index, 1);
+            localStorage.setItem("transactions", JSON.stringify(transactions));
+            displayTransactions();
+        });
+        li.appendChild(deleteButton);
     });
 
     incomeAmount.textContent = `$${calculatorIncome()}`;
@@ -91,6 +109,10 @@ addStartingBalanceButton.addEventListener("click", () => {
 });
 
 transactionButton.addEventListener("click", () => {
+    if(transactionDescription.value === "" || transactionAmount.value === "" || transactionDate.value === ""){
+        alert("Please fill in all fields!");
+        return;
+    }
     let newTransaction = {
         description: transactionDescription.value,
         amount: transactionAmount.value,

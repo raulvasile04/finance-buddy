@@ -3,6 +3,10 @@ body{
     overflow-x:auto ;
 }
 
+.body::-webkit-scrollbar {
+    display: none;
+}
+
 h1{
     color: white;
     font-family: "Bungee", sans-serif;
@@ -284,4 +288,46 @@ select{
     font-weight: 50;
     font-style: normal;
     padding : 1px;
+}
+
+.transaction-income{
+    background-color : rgb(23 166 7 / 0.44);
+    padding : 10px;
+    border-radius: 7px;
+    margin-bottom: 8px;
+    box-shadow: 0 0 15px rgba(23,166, 7, 0.5);
+}
+
+.transaction-expense{
+    background-color : rgb(255 0 0 / 0.4);
+    padding : 10px;
+    border-radius: 7px;
+    margin-bottom: 8px;
+    box-shadow: 0 0 15px rgba(255, 0, 0 , 0.5);
+}
+
+ul{
+    list-style-type: none;
+    padding-left : 10px;
+    padding-right : 10px;
+    font-family: "Bungee", sans-serif;
+    font-size : 13px;
+    font-weight: 50;
+    font-style: normal;
+}
+
+li{
+    position: relative;
+}
+
+.delete-button{
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    background-color: #fd0000;
+    width: auto;
+    color: #ffffff;
+    border: black solid 2px;
+    border-radius: 5px;
+    cursor: pointer;
 }
