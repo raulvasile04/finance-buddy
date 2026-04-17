@@ -305,6 +305,10 @@ select{
     border-radius: 7px;
     margin-bottom: 8px;
     box-shadow: 0 0 15px rgba(23,166, 7, 0.5);
+    padding-right: 70px;
+    word-wrap: break-word;
+    overflow: hidden;
+
 }
 
 .transaction-expense{
@@ -313,6 +317,10 @@ select{
     border-radius: 7px;
     margin-bottom: 8px;
     box-shadow: 0 0 15px rgba(255, 0, 0 , 0.5);
+    padding-right: 70px;
+    word-wrap: break-word;
+    overflow: hidden;
+
 }
 
 ul{
