@@ -15,24 +15,23 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-const slider = document.querySelector(".container");
+const slider = document.documentElement;
 slider.addEventListener("mousedown", (e) => {
     isDown = true;
-    startX = e.pageX;
-    scrollLeft = slider.scrollLeft;
+    startX = e.clientX;
+    scrollLeft = window.scrollX;
+    e.preventDefault();
 });
 
-slider.addEventListener("mouseup", (e) => {
+addEventListener("mouseup", (e) => {
     isDown = false;
 });
 
-slider.addEventListener("mousemove", (e) => {
-    if(isDown === false) {
-        return null;
-    }
-
-    const x = e.pageX - startX;
-    slider.scrollLeft = scrollLeft - x;
+addEventListener("mousemove", (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.clientX - startX;
+    window.scrollTo(scrollLeft - x, 0);
 });
 
 const modal = document.getElementById("modal");

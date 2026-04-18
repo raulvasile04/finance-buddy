@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: auto;
+}
+
 body{
     background : #2FA084;
     overflow-x:auto ;
@@ -391,4 +395,13 @@ li{
     font-style: normal;
     color: white;
     border : none;
+}
+
+.container {
+    user-select: none;
+    cursor: grab;
+}
+
+.container:active {
+    cursor: grabbing;
 }
