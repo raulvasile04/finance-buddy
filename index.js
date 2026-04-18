@@ -11,6 +11,29 @@ const incomeAmount = document.getElementById("income-amount");
 const expenseAmount = document.getElementById("expense-amount");
 
 let transactions = [];
+let isDown = false;
+let startX;
+let scrollLeft;
+
+const slider = document.querySelector(".container");
+slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener("mouseup", (e) => {
+    isDown = false;
+});
+
+slider.addEventListener("mousemove", (e) => {
+    if(isDown === false) {
+        return null;
+    }
+
+    const x = e.pageX - startX;
+    slider.scrollLeft = scrollLeft - x;
+});
 
 const modal = document.getElementById("modal");
 const closeModal = document.getElementById("close-modal");
