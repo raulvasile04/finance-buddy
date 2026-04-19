@@ -21,6 +21,7 @@ FinanceBuddy is a web-based personal finance tracker that allows users to manage
 - Using instructions is form of a modal to help the user understand the app
 - Responsive UI with horizontal scrolling for monthly views
 - Delete button integrated in the transiction card for deleting unwanted transactions
+- Live currency conversion in 4 currencies via fetched API 
 
 ## 🛠️Tech-Stack
 - HTML
@@ -32,7 +33,8 @@ FinanceBuddy is a web-based personal finance tracker that allows users to manage
 
 Users can set an initial balance and add transactions with a description, type, amount, and date.  
 Transactions are automatically grouped by month, and the UI updates dynamically to reflect the current financial state.
-They can also delete a transaction if it's not needed anymore
+A user can also use a prefered currency . There are 4 options , USD , EUR , GBP , RON.
+They can also delete a transaction if it's not needed anymore 
 
 ## ⚙️How to Run
 
