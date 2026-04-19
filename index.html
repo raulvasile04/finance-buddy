@@ -26,13 +26,25 @@
                 <input type = "number" id = "starting-balance" placeholder = "Starting Balance">
                 <button type = "button" id = "starting-balance-button"> Add Starting Balance :  </button>
             </div>
-            <div class = "income">
-                <h3 id = "income-title">Income</h3>
-                <p id = "income-amount"></p>
+            <div class = "exchange-wrapper">
+                <label>Choose currency</label>
+                <select id ="exchange">
+                    <option value = "USD">USD</option>
+                    <option value = "EUR">EUR</option>
+                    <option value = "GBP">GBP</option>
+                    <option value = "RON">RON</option>
+                </select>
+                <button type = "button" id = "exchange-button"> Change Currency </button>
             </div>
-            <div class = "expenses">
-                <h3 id = "expenses-title">Expenses</h3>
-                <p id = "expense-amount"></p>
+            <div class = "income-expense">
+                <div class = "income">
+                    <h3 id = "income-title">Income</h3>
+                    <p id = "income-amount"></p>
+                </div>
+                <div class = "expenses">
+                    <h3 id = "expenses-title">Expenses</h3>
+                    <p id = "expense-amount"></p>
+                </div>
             </div>
         </div>
         <div class = "transactions">

@@ -9,6 +9,8 @@ const addStartingBalanceButton = document.getElementById("starting-balance-butto
 const transactionType = document.getElementById("transaction-type");
 const incomeAmount = document.getElementById("income-amount");
 const expenseAmount = document.getElementById("expense-amount");
+const currencySelector = document.getElementById("exchange");
+const changeCurrencyButton = document.getElementById("exchange-button");
 
 let transactions = [];
 let isDown = false;
@@ -20,30 +22,9 @@ slider.addEventListener("mousedown", (e) => {
     isDown = true;
     startX = e.clientX;
     scrollLeft = window.scrollX;
-    e.preventDefault();
 });
 
-addEventListener("mouseup", (e) => {
-    isDown = false;
-});
-
-addEventListener("mousemove", (e) => {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.clientX - startX;
-    window.scrollTo(scrollLeft - x, 0);
-});
-
-const modal = document.getElementById("modal");
-const closeModal = document.getElementById("close-modal");
-modal.style.display = "flex";
-closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-
-
-function displayTransactions() {
+function displayTransactions(exchangeRate = 1) {
     transactionList.innerHTML = "";
     document.querySelectorAll(".transaction-lists:not(#original-list)").forEach(card => card.remove());
     transactions.forEach((transaction, index) => {
@@ -51,7 +32,9 @@ function displayTransactions() {
         const month = date.toLocaleString("default", {month: "long"});
         const existingCard = document.getElementById(`${month}-card`);
         const li = document.createElement("li");
-        li.textContent = `Your transaction : ${transaction.description} , ${transaction.type} $${transaction.amount} , ${transaction.date}`;
+        const updatedAmount = transaction.amount * exchangeRate;
+        const selectedCurrency = currencySelector.value;
+        li.textContent = `Your transaction : ${transaction.description} , ${transaction.type} ${updatedAmount.toFixed(2)} ${selectedCurrency} , ${transaction.date}`;
         transactionList.appendChild(li);
         if (existingCard === null) {
             createMonthCard(month);
@@ -86,30 +69,17 @@ function displayTransactions() {
     expenseAmount.textContent = `$${calculatorExpense()}`;
 }
 
-if(localStorage.getItem("transactions") != null){
-    transactions = JSON.parse(localStorage.getItem("transactions"));
-    displayTransactions()
-}
-
-console.log(transactions);
-
 function calculatorIncome(){
-    let total = Number(startingBalanceInput.value);
-    transactions.forEach(transaction => {
-        if(transaction.type === "income") {
-            total += Number(transaction.amount);
-        }
-    });
-    return total;
+    let startingB = Number(startingBalanceInput.value);
+    const filteredIncomes = transactions.filter(transaction => transaction.type === "income");
+    const total = filteredIncomes.reduce((total , transaction) => total + Number(transaction.amount) , 0);
+    return total + startingB;
 }
 
 function calculatorExpense(){
     let total = 0 ;
-    transactions.forEach(transaction => {
-        if(transaction.type === "expense") {
-            total += Number(transaction.amount);
-        }
-    });
+    const filteredExpenses = transactions.filter(transaction => transaction.type === "expense");
+    total = filteredExpenses.reduce((total , transaction) => total + Number(transaction.amount) , 0);
     return total;
 }
 
@@ -127,6 +97,55 @@ function createMonthCard(month){
     monthCard.appendChild(whiteBox);
     document.querySelector(".container").appendChild(monthCard);
 }
+
+async function loadSavedCurrency(){
+    if(localStorage.getItem("currency") != null){
+        const savedCurrency = localStorage.getItem("currency");
+        const fetchedCurrency = await fetch(`https://api.exchangerate-api.com/v4/latest/USD`);
+        const data = await fetchedCurrency.json();
+        const exchangeRate = data.rates[savedCurrency];
+        displayTransactions(exchangeRate);
+        incomeAmount.textContent = `${(calculatorIncome() * exchangeRate).toFixed(2)} ${savedCurrency}`;
+        expenseAmount.textContent = `${(calculatorExpense() * exchangeRate).toFixed(2)} ${savedCurrency}`;
+    }
+}
+
+if(localStorage.getItem("transactions") != null){
+    transactions = JSON.parse(localStorage.getItem("transactions"));
+    displayTransactions();
+}
+loadSavedCurrency();
+
+changeCurrencyButton.addEventListener("click", async(e) => {
+    const selectedCurrency = currencySelector.value;
+    const currency = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+    const data = await currency.json();
+    const exchangeRate = data.rates[selectedCurrency];
+    const convertedIncome = calculatorIncome() * exchangeRate;
+    const convertedExpense = calculatorExpense() * exchangeRate;
+    displayTransactions(exchangeRate);
+    incomeAmount.textContent = `${convertedIncome.toFixed(2)} ${selectedCurrency}`;
+    expenseAmount.textContent = `${convertedExpense.toFixed(2)} ${selectedCurrency}`;
+    localStorage.setItem("currency", selectedCurrency);
+});
+
+addEventListener("mouseup", (e) => {
+    isDown = false;
+});
+
+addEventListener("mousemove", (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.clientX - startX;
+    window.scrollTo(scrollLeft - x, 0);
+});
+
+const modal = document.getElementById("modal");
+const closeModal = document.getElementById("close-modal");
+modal.style.display = "flex";
+closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+});
 
 addStartingBalanceButton.addEventListener("click", () => {
     let startingBalance = {
