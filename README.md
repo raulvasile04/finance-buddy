@@ -18,22 +18,22 @@ FinanceBuddy is a web-based personal finance tracker that allows users to manage
 - Automatic grouping of transactions by month
 - Real-time calculation of balance, income, and expenses
 - Persistent data storage using localStorage
-- Using instructions is form of a modal to help the user understand the app
+- Using instructions in form of a modal to help the user understand the app
 - Responsive UI with horizontal scrolling for monthly views
-- Delete button integrated in the transiction card for deleting unwanted transactions
+- Delete button integrated in the transaction card for deleting unwanted transactions
 - Live currency conversion in 4 currencies via fetched API 
 
 ## 🛠️Tech-Stack
 - HTML
 - CSS
 - JavaScript
-- Web Local Storage
+- Local Storage
 
 ## 💡How It Works
 
 Users can set an initial balance and add transactions with a description, type, amount, and date.  
 Transactions are automatically grouped by month, and the UI updates dynamically to reflect the current financial state.
-A user can also use a prefered currency . There are 4 options , USD , EUR , GBP , RON.
+A user can also use a preferred currency . There are 4 options , USD , EUR , GBP , RON.
 They can also delete a transaction if it's not needed anymore 
 
 ## ⚙️How to Run
