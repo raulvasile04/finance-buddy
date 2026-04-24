@@ -21,13 +21,21 @@ FinanceBuddy is a web-based personal finance tracker that allows users to manage
 - Using instructions in form of a modal to help the user understand the app
 - Responsive UI with horizontal scrolling for monthly views
 - Delete button integrated in the transaction card for deleting unwanted transactions
-- Live currency conversion in 4 currencies via fetched API 
+- Live currency conversion in 4 currencies via fetched API
+- Persistent data storage via PostgreSQL database
+- Connected to a RESTful API
 
 ## 🛠️Tech-Stack
+**Frontend:**
 - HTML
 - CSS
 - JavaScript
-- Local Storage
+
+**Backend:**
+- Node.js
+- Express.js
+- PostgreSQL
+- REST API
 
 ## 💡How It Works
 
@@ -35,6 +43,13 @@ Users can set an initial balance and add transactions with a description, type, 
 Transactions are automatically grouped by month, and the UI updates dynamically to reflect the current financial state.
 A user can also use a preferred currency . There are 4 options , USD , EUR , GBP , RON.
 They can also delete a transaction if it's not needed anymore 
+
+## Backend
+This app is connected to a RESTful API built with Node.js, Express and PostgreSQL.
+
+- API Repository: [finance-buddy-api](https://github.com/raulvasile04/finance-buddy-api)
+
+The API handles all transaction data storage and retrieval, replacing the previous localStorage implementation.
 
 ## ⚙️How to Run
 
@@ -49,7 +64,6 @@ They can also delete a transaction if it's not needed anymore
 - Introduce categories (e.g., food, rent, entertainment)
 - Add charts for financial insights
 ### Nice to haves :
-- Implement backend support with a database
 - Add user authentication
 
 ## 👨‍💻 Author
