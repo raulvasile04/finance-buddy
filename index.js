@@ -24,6 +24,14 @@ slider.addEventListener("mousedown", (e) => {
     scrollLeft = window.scrollX;
 });
 
+async function loadTransactions() {
+    const fetched = await fetch("http://localhost:3000/transactions");
+    const parsed = await fetched.json();
+    transactions = parsed;
+    displayTransactions();
+}
+loadTransactions();
+
 function displayTransactions(exchangeRate = 1) {
     transactionList.innerHTML = "";
     document.querySelectorAll(".transaction-lists:not(#original-list)").forEach(card => card.remove());
@@ -56,11 +64,13 @@ function displayTransactions(exchangeRate = 1) {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.classList.add("delete-button");
-        deleteButton.dataset.index = index;
-        deleteButton.addEventListener("click", () => {
-            transactions.splice(index, 1);
-            localStorage.setItem("transactions", JSON.stringify(transactions));
-            displayTransactions();
+        deleteButton.dataset.id = transaction.id;
+        deleteButton.addEventListener("click", async() => {
+            const id = deleteButton.dataset.id;
+            await fetch(`http://localhost:3000/transactions/${transaction.id}` , {
+                method: "DELETE",
+            });
+            loadTransactions();
         });
         li.appendChild(deleteButton);
     });
@@ -158,7 +168,7 @@ addStartingBalanceButton.addEventListener("click", () => {
     addStartingBalanceButton.style.display = "none";
 });
 
-transactionButton.addEventListener("click", () => {
+transactionButton.addEventListener("click", async() => {
     if(transactionDescription.value === "" || transactionAmount.value === "" || transactionDate.value === ""){
         alert("Please fill in all fields!");
         return;
@@ -169,9 +179,13 @@ transactionButton.addEventListener("click", () => {
         date: transactionDate.value,
         type: transactionType.value
     };
-    transactions.push(newTransaction);
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-    displayTransactions();
+    const response = await fetch("http://localhost:3000/transactions", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(newTransaction)
+    });
+    await response.json();
+    loadTransactions();
     transactionDescription.value = "";
     transactionAmount.value = "";
     transactionDate.value = "";
